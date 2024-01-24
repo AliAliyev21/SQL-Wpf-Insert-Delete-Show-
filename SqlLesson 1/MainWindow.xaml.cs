@@ -26,7 +26,7 @@ namespace SqlLesson_1
        
         private void showall_Click(object sender, RoutedEventArgs e)
         {
-            var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=LibraryB;Integrated Security=True;";
+            var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Library;Integrated Security=True;";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -48,7 +48,7 @@ namespace SqlLesson_1
         {
             string deleteId = id.Text;
 
-            var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=LibraryB;Integrated Security=True;";
+            var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Library;Integrated Security=True;";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -81,7 +81,7 @@ namespace SqlLesson_1
             string newFirstName = firstName.Text;
             string newLastName = lastName.Text;
 
-            var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=LibraryB;Integrated Security=True;";
+            var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Library;Integrated Security=True;";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
