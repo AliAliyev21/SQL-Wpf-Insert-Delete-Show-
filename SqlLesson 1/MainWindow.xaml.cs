@@ -1,4 +1,4 @@
-﻿using System.Data;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using System.Windows;
@@ -18,12 +18,18 @@ namespace SqlLesson_1
     /// </summary>
     public partial class MainWindow : Window
     {
+        public class Author
+        {
+            public string Id { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-       
         private void showall_Click(object sender, RoutedEventArgs e)
         {
             var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Library;Integrated Security=True;";
@@ -31,15 +37,24 @@ namespace SqlLesson_1
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-                SqlDataReader reader = null;
                 var query = "SELECT * FROM Authors";
 
                 using (var command = new SqlCommand(query, con))
                 {
-                    reader = command.ExecuteReader();
-                    DataTable dataTable = new DataTable();
-                    dataTable.Load(reader);
-                    myDataGrid.ItemsSource = dataTable.DefaultView;
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    List<Author> authorsList = new List<Author>();
+                    while (reader.Read())
+                    {
+                        Author author = new Author
+                        {
+                            Id = reader["Id"].ToString(),
+                            FirstName = reader["FirstName"].ToString(),
+                            LastName = reader["LastName"].ToString()
+                        };
+                        authorsList.Add(author);
+                    }
+                    myDataGrid.ItemsSource = authorsList;
                 }
             }
         }
